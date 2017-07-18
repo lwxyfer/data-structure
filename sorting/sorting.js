@@ -12,7 +12,7 @@ function exchange(arr, i, j) {
  * @param {array} array to sort
  * @param {boolean}  ascending order or descending order
  */
-function selection(arr, reverse) {
+export function selection(arr, reverse) {
   const length = arr.length;
   let i = null;
   let j = null;
@@ -21,7 +21,7 @@ function selection(arr, reverse) {
     min = i;
 
     for(j = i + 1; j < length; j++) {
-      if (reverse ? arr[j] < arr[min] : arr[j] > arr[min]) {
+      if (reverse ? arr[j] > arr[min] : arr[j] < arr[min]) {
         min = j;
       }
     }

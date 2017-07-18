@@ -1,0 +1,30 @@
+{
+  "name": "DataStructure",
+  "version": "1.0.0",
+  "description": "Data structure implement in ES6.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lwxyfer/data-structure.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lwxyfer/data-structure/issues"
+  },
+  "homepage": "https://github.com/lwxyfer/data-structure#readme",
+  "devDependencies": {
+    "babel-jest": "^20.0.3",
+    "babel-preset-env": "^1.6.0",
+    "jest": "^20.0.4"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js?$": "babel-jest"
+    }
+  }
+}
