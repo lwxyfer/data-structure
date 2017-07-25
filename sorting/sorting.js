@@ -46,3 +46,43 @@ export function insertion(arr, reverse) {
   }
   return arr 
 }
+
+
+/**
+ * Merge sort
+ */
+function merge(arr, low, middle, high) {
+  const aux = [];
+  const i = low;
+  const j = middle + 1;
+  for (let k = low; k <= high; k++) {
+    aux[k] = arr[k]
+  }
+  for (let k = low; k <= high; k++) {
+    if (i > middle) {
+      arr[k] = aux[j++]
+    } else if (j > high) {
+      arr[k] = aux[i++]
+    } else if (aux[j] > aux[i]) {
+      arr[k] = aux[i++]
+    } else {
+      arr[k] = aux[j++]
+    }
+  }
+}
+
+
+export function mergeSort(arr) {
+  const aux = [];
+  function sort(arr, low, high) {
+    if (low > high) {
+      return
+    }
+    const middle = Math.floor((high + low)/2);
+    sort(arr, middle + 1, high);
+    sort(arr, low, mid);
+    merge(arr, low, middle, high)
+  }
+  sort(arr, 0, arr.length-1)
+  return arr;
+}
