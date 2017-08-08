@@ -73,7 +73,6 @@ function merge(arr, low, middle, high) {
 
 
 export function mergeSort(arr) {
-  const aux = [];
   function sort(arr, low, high) {
     if (low >= high) {
       return
@@ -85,4 +84,14 @@ export function mergeSort(arr) {
   }
   sort(arr, 0, arr.length-1)
   return arr;
+}
+
+export function mergeSortBU(arr) {
+  const length = arr.length;
+  for(let i = 1; i < length; i = i + i) {
+    for(let j = 0; j < length - i; j += i + i) {
+      merge(arr, j, j + i - 1, Math.min(j + i + i -1, length - 1))
+    }
+  }
+  return arr
 }

@@ -1,7 +1,8 @@
 import {
   selection,
   insertion,
-  mergeSort
+  mergeSort,
+  mergeSortBU
 } from './sorting.js';
 
 // selection
@@ -25,4 +26,8 @@ test('[3,65,-23,14,55,14,34] ascending order is [3, 14, 23, 34, 43, 55, 65]', ()
 // merge
 test('[3,65,-23,14,55,14,34] ascending order is [3, 14, 23, 34, 43, 55, 65]', () => {
   expect(mergeSort([3,65,-23,14,55,14,34])).toEqual([-23, 3, 14, 14, 34, 55, 65]);
+});
+
+test('[3,65,-23,14,55,14,34] ascending order is [3, 14, 23, 34, 43, 55, 65]', () => {
+  expect(mergeSortBU([3, 65, -23, 14, 55, 14, 34])).toEqual([-23, 3, 14, 14, 34, 55, 65]);
 });
