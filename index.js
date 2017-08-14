@@ -261,3 +261,7 @@ class Set {
     }
   }
 }
+
+/**
+ * Priority queue
+ */
