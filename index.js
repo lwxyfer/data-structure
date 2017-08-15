@@ -1,21 +1,21 @@
 /*
-* Data stucture 
-* Inspired By Algorithms(Fourth Edition)
-*/ 
+ * Data stucture 
+ * Inspired By Algorithms(Fourth Edition)
+ */
 
 
 class Bag {
   constructor(initial = []) {
     this.bag = initial;
   }
-  
+
   add(item) {
     this.bag.push(item);
     return this.bag
   }
 
   isEmpty() {
-    return !this.bag.length ?  true : false;
+    return !this.bag.length ? true : false;
   }
 
   size() {
@@ -25,8 +25,8 @@ class Bag {
 
 
 /*
-* FIFO
-*/
+ * FIFO
+ */
 class Queue {
   constructor(initial = []) {
     this.queue = initial;
@@ -50,7 +50,7 @@ class Queue {
   }
 
   isEmpty() {
-    return !this.queue.length ?  true : false;
+    return !this.queue.length ? true : false;
   }
 
   size() {
@@ -75,7 +75,7 @@ class Stack {
   }
 
   isEmpty() {
-    return !this.stack.length ?  true : false;
+    return !this.stack.length ? true : false;
   }
 
   size() {
@@ -84,8 +84,8 @@ class Stack {
 }
 
 /*
-* Reference API: https://courses.edx.org/c4x/PekingX/04830050x/asset/2-3.pdf 
-*/
+ * Reference API: https://courses.edx.org/c4x/PekingX/04830050x/asset/2-3.pdf 
+ */
 class LinkedListNode {
   constructor(element) {
     this.element = element
@@ -102,11 +102,11 @@ class LinkedList {
   append(element) {
     const node = new LinkedListNode(element);
     let current = null;
-    if (this.head  === null) {
+    if (this.head === null) {
       this.head = node;
     } else {
       current = this.head;
-      while(current.next) {
+      while (current.next) {
         current = current.next;
       }
       current.next = node;
@@ -135,7 +135,7 @@ class LinkedList {
       let current = this.head;
       let previous = null;
 
-      while(index++ < position) {
+      while (index++ < position) {
         previous = current;
         current = current.next;
       }
@@ -160,7 +160,7 @@ class LinkedList {
         previous.next = current.next
       }
       this.length--
-      return current.element
+        return current.element
     }
     return true;
   }
@@ -263,5 +263,107 @@ class Set {
 }
 
 /**
- * Priority queue
+ * Dictionary, Associative Array, Map
+ * { key: value }
  */
+// JS Object
+
+
+/**
+ * Priority queue
+ * array LinkedList Heap
+ */
+
+
+/**
+ * HashTable, HashMap
+ * right translation: https://zh.wikipedia.org/wiki/%E6%95%A3%E5%88%97
+ */
+class HashTable {
+  constructor() {
+    this.table = [];
+  }
+
+  // lose lose hash function
+  static loseloseHashCode(key) {
+    let hash = 0;
+    for (let codepoint of key) {
+      hash += codepoint.charCodeAt();
+    }
+    // decrease the probability of hash repeat
+    return hash % 37
+  }
+
+  put(key, value) {
+    const position = HashTable.loseloseHashCode(key)
+    this.table[position] = value
+  }
+
+  get(key) {
+    return this.table[HashTable.loseloseHashCode(key)]
+  }
+
+  remove(key) {
+    this.table[HashTable.loseloseHashCode(key)] = undefined
+  }
+}
+
+
+/**
+ * HashTable, HashMap: Collision resolution
+ * 1. Separate chaining with linked lists
+ * https://en.wikipedia.org/wiki/Hash_table
+ */
+class HashTableLinkedlists {
+  constructor() {
+    this.table = [];
+  }
+
+  static loseloseHashCode(key) {
+    let hash = 0;
+    for (let codepoint of key) {
+      hash += codepoint.charCodeAt();
+    }
+    return hash % 37
+  }
+
+  put(key, value) {
+    const position = HashTable.loseloseHashCode(key)
+    if (this.table[position] === undefined) {
+      this.table[position] = new LinkedList()
+    }
+    this.table[position].append({ key, value })
+  }
+
+  get(key) {
+    const position = HashTable.loseloseHashCode(key)
+    if (this.table[position] === undefined) return undefined
+    const getElementValue = node => {
+      if (!node && !node.element) return undefined
+      if (Object.is(node.element.key, key)) {
+        return node.element.value
+      } else {
+        return getElementValue(node.next)
+      }
+    }
+    return getElementValue(this.table[position].head)
+  }
+
+  remove(key) {
+    const position = HashTable.loseloseHashCode(key)
+    if (this.table[position] === undefined) return undefined
+    const getElementValue = node => {
+      if (!node && !node.element) return false
+      if (Object.is(node.element.key, key)) {
+        this.table[position].remove(node.element)
+        if (this.table[position].isEmpty) {
+          this.table[position] = undefined
+        }
+        return true
+      } else {
+        return getElementValue(node.next)
+      }
+    }
+    return getElementValue(this.table[position].head)
+  }
+}
