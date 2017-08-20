@@ -284,7 +284,7 @@ class HashTable {
     this.table = [];
   }
 
-  // lose lose hash function
+  // lose-lose hash function
   static loseloseHashCode(key) {
     let hash = 0;
     for (let codepoint of key) {
@@ -328,7 +328,7 @@ class HashTableLinkedlists {
   }
 
   put(key, value) {
-    const position = HashTable.loseloseHashCode(key)
+    const position = this.loseloseHashCode(key);
     if (this.table[position] === undefined) {
       this.table[position] = new LinkedList()
     }
@@ -336,10 +336,10 @@ class HashTableLinkedlists {
   }
 
   get(key) {
-    const position = HashTable.loseloseHashCode(key)
-    if (this.table[position] === undefined) return undefined
+    const position = this.loseloseHashCode(key);
+    if (this.table[position] === undefined) return;
     const getElementValue = node => {
-      if (!node && !node.element) return undefined
+      if (!node && !node.element.key) return undefined
       if (Object.is(node.element.key, key)) {
         return node.element.value
       } else {
@@ -365,5 +365,56 @@ class HashTableLinkedlists {
       }
     }
     return getElementValue(this.table[position].head)
+  }    
+  
+}
+
+
+/**
+ * HashTable, HashMap: Collision resolution 
+ * 2. Linear Probing
+ */
+class HashTable {
+  constructor() {
+    this.table = [];
+  }
+
+  static loseloseHashCode(key) {
+    let hash = 0;
+    for (let codepoint of key) {
+      hash += codepoint.charCodeAt();
+    }
+    return hash % 37
+  }
+
+  put(key, value) {
+    let position = HashTable.loseloseHashCode(key)
+    while (table[position] !== undefined) {
+      position++;
+    }
+    this.table[position] = {key, value};
+  }
+
+  get(key) {
+    let position = HashTable.loseloseHashCode(key)
+    while(thih.table[position]) {
+      if (Object.is(this.table[position].key, key)) {
+        return this.table[position].value
+      }
+      position++
+    }
+    return undefined
+  }
+
+  remove(key) {
+    const position = HashTable.loseloseHashCode(key)
+    while (thih.table[position]) {
+      if (Object.is(this.table[position].key, key)) {
+        this.table[position] = undefined;
+        return true;
+      }
+      position++
+    }
+    return false
   }
 }
