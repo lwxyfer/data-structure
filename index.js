@@ -59,7 +59,9 @@ class Queue {
 }
 
 
-
+/**
+ * stack
+ */
 class Stack {
   constructor(initial = []) {
     this.stack = initial;
@@ -82,6 +84,14 @@ class Stack {
     return this.stack.length
   }
 }
+
+/**
+ * arithmetic expression
+ * @desc stack practical application
+ */
+
+
+
 
 /*
  * Reference API: https://courses.edx.org/c4x/PekingX/04830050x/asset/2-3.pdf 
@@ -417,4 +427,59 @@ class HashTable {
     }
     return false
   }
+}
+
+
+/**
+ * different hash function
+ */
+function djb2HashCode(key) { 
+  let hash = 5381
+  for (let codePoint of key) {
+    hash = hash * 33 + codePoint.charCodeAt()
+  }
+  return hash % 1013
+}
+
+
+/**
+ * Tree Node
+ */
+class TreeNode {
+  constructor(key) {
+    this.key = key
+    this.left = null
+    this.right = null
+  }
+}
+
+class BinarySearchTree {
+  constructor() {
+    this.root = null;
+  }
+
+  insert(key) {
+    const newNode = new TreeNode(key);
+    const insertNode = (node, newNode) => {
+      if (newNode.key < node.key) {
+        if (!node.left) {
+          node.left = newNode
+        } else {
+          insertNode(node.left, node)
+        }
+      } else {
+        if (!node.right) {
+          node.right = newNode
+        } else {
+          indertNode(node.right, newNode)
+        }
+      }
+    }
+    if (!this.root) {
+      this.root = newNode;
+    } else {
+      insertNode(this.root, newNode)
+    }
+  }
+
 }
