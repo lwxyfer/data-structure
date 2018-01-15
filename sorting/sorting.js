@@ -38,8 +38,8 @@ export function selection(arr, reverse) {
 export function insertion(arr, reverse) {
   const length = arr.length;
   for(let i = 1; i < length; i++) {
+    if (reverse ? arr[j] > arr[j-1] : arr[j] < arr[j-1]) {
     for(let j = i; j > 0; j-- ) {
-      if (reverse ? arr[j] > arr[j-1] : arr[j] < arr[j-1]) {
         exchange(arr, j-1, j)
       }
     }

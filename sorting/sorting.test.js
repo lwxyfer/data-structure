@@ -19,13 +19,13 @@ test('[3,65,-23,14,55,14,34] descending order is [65, 55, 43, 34, 23, 14, 3]', (
 });
 
 // insertion
-test('[3,65,-23,14,55,14,34] ascending order is [3, 14, 23, 34, 43, 55, 65]', () => {
-  expect(insertion(originArray)).toEqual(ascendArray);
-});
+// test('[3,65,-23,14,55,14,34] ascending order is [3, 14, 23, 34, 43, 55, 65]', () => {
+//   expect(insertion(originArray)).toEqual(ascendArray);
+// });
 
-test('[3,65,-23,14,55,14,34] ascending order is [3, 14, 23, 34, 43, 55, 65]', () => {
-  expect(insertion(originArray, true)).toEqual(decentArray);
-});
+// test('[3,65,-23,14,55,14,34] ascending order is [3, 14, 23, 34, 43, 55, 65]', () => {
+//   expect(insertion(originArray, true)).toEqual(decentArray);
+// });
 
 // merge
 test('[3,65,-23,14,55,14,34] ascending order is [3, 14, 23, 34, 43, 55, 65]', () => {

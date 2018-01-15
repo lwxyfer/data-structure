@@ -18,7 +18,7 @@ class Bag {
     return !this.bag.length ? true : false;
   }
 
-  size() {
+  get size() {
     return this.bag.length
   }
 }
@@ -41,7 +41,7 @@ class Queue {
     return this.queue.shift();
   }
 
-  front() {
+  get front() {
     return this.queue[0];
   }
 
@@ -49,11 +49,11 @@ class Queue {
     this.queue = [];
   }
 
-  isEmpty() {
+  get isEmpty() {
     return !this.queue.length ? true : false;
   }
 
-  size() {
+  get size() {
     return this.queue.length
   }
 }
@@ -114,7 +114,7 @@ class LinkedList {
     let current = null;
     if (this.head === null) {
       this.head = node;
-    } else {
+    } else { 
       current = this.head;
       while (current.next) {
         current = current.next;
@@ -384,7 +384,7 @@ class HashTableLinkedlists {
  * HashTable, HashMap: Collision resolution 
  * 2. Linear Probing
  */
-class HashTable {
+class HashTable2 {
   constructor() {
     this.table = [];
   }
@@ -417,7 +417,7 @@ class HashTable {
   }
 
   remove(key) {
-    const position = HashTable.loseloseHashCode(key)
+    let position = HashTable.loseloseHashCode(key)
     while (thih.table[position]) {
       if (Object.is(this.table[position].key, key)) {
         this.table[position] = undefined;
@@ -445,7 +445,7 @@ function djb2HashCode(key) {
 /**
  * Tree Node
  */
-class TreeNode {
+class Node {
   constructor(key) {
     this.key = key
     this.left = null
@@ -454,32 +454,72 @@ class TreeNode {
 }
 
 class BinarySearchTree {
+
   constructor() {
-    this.root = null;
+    this.root = null
   }
 
   insert(key) {
-    const newNode = new TreeNode(key);
+    const newNode = new Node(key)
     const insertNode = (node, newNode) => {
       if (newNode.key < node.key) {
-        if (!node.left) {
+        if (node.left === null) {
           node.left = newNode
         } else {
-          insertNode(node.left, node)
+          insertNode(node.left, newNode)
         }
       } else {
-        if (!node.right) {
+        if (node.right === null) {
           node.right = newNode
         } else {
-          indertNode(node.right, newNode)
+          insertNode(node.right, newNode)
         }
       }
     }
     if (!this.root) {
-      this.root = newNode;
+      this.root = newNode
     } else {
       insertNode(this.root, newNode)
     }
   }
 
+  inOrderTraverse(callback) {
+    const inOrderTraverseNode = (node, callback) => {
+      if (node !== null) {
+        inOrderTraverseNode(node.left, callback)
+        callback(node.key)
+        inOrderTraverseNode(node.right, callback)
+      }
+    }
+    inOrderTraverseNode(this.root, callback)
+  }
+
+  preOrderTraverse(callback) {
+    const preOrderTraverseNode = (node, callback) => {
+      if (node !== null) {
+        callback(node.key)
+        preOrderTraverseNode(node.left, callback)
+        preOrderTraverseNode(node.right, callback)
+      }
+    }
+    preOrderTraverseNode(this.root, callback)
+  }
+
+  postOrderTraverse(callback) {
+    const postOrderTraverseNode = (node, callback) => {
+      if (node !== null) {
+        postOrderTraverseNode(node.left, callback)
+        postOrderTraverseNode(node.right, callback)
+        callback(node.key)
+      }
+    }
+    postOrderTraverseNode(this.root, callback)
+  }
+}
+
+
+export {
+  Bag,
+  Queue,
+  BinarySearchTree,
 }
