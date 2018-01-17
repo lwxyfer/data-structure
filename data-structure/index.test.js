@@ -3,6 +3,9 @@ const structure = require('./index.js')
 const {
   Bag,
   Queue,
+  PriorityQueue,
+  Stack,
+  LinkedList,
   BinarySearchTree
 } = structure;
 
@@ -45,6 +48,79 @@ test('queue isEmpty', () => {
   queueIns.clear()
   expect(queueIns.isEmpty).toBe(true)
 })
+
+// PriorityQueue
+const priorityQueueIns = new PriorityQueue()
+
+test('PriorityQueue init', () => {
+  priorityQueueIns.enqueue(1)
+  priorityQueueIns.enqueue(2, 10)
+  priorityQueueIns.enqueue(3, 5)
+  expect(priorityQueueIns.items).toEqual([
+    {
+      element: 1,
+      priority: 0
+    },
+    {
+      element: 3,
+      priority: 5
+    },
+    {
+      element: 2,
+      priority: 10
+    }
+  ]);
+})
+
+test('PriorityQueue dequeue', () => {
+  expect(priorityQueueIns.dequeue()).toEqual({element: 2, priority: 10});
+})
+
+
+
+
+
+// Stack
+const stackIns = new Stack([1,2,3,4])
+
+test('stack init', () => {
+  expect(stackIns.stack).toEqual([1,2,3,4])
+})
+test('stack push', () => {
+  expect(stackIns.push(5)).toEqual([1,2,3,4,5])
+})
+test('stack pop', () => {
+  expect(stackIns.pop()).toBe(5)
+})
+test('stack isEmpty', () => {
+  expect(stackIns.isEmpty).toBe(false)
+})
+test('stack pop', () => {
+  expect(stackIns.size).toBe(4)
+})
+
+
+// LinkedList
+const LinkedListIns = new LinkedList()
+
+test('LinkedListIns append', () => {
+  LinkedListIns.append(1)
+  expect(LinkedListIns.head.element).toBe(1)
+})
+
+test('LinkedListIns prepend', () => {
+  LinkedListIns.prepend(3)
+  expect(LinkedListIns.head.element).toBe(3)
+})
+
+test('LinkedListIns insert', () => {
+  LinkedListIns.insert(1, 2)
+  
+  expect(LinkedListIns.remove(1)).toBe(2)
+  expect(LinkedListIns.head.element).toBe(3)
+  expect(LinkedListIns.size).toBe(2)
+})
+
 
 
 const tree = new BinarySearchTree();

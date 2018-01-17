@@ -76,11 +76,11 @@ class Stack {
     return this.stack.pop();
   }
 
-  isEmpty() {
+  get isEmpty() {
     return !this.stack.length ? true : false;
   }
 
-  size() {
+  get size() {
     return this.stack.length
   }
 }
@@ -155,14 +155,15 @@ class LinkedList {
     this.length++;
   }
 
-  remove(index) {
-    if (position > -1 && position < length) {
+  remove(position) {
+    if (position > -1 && position < this.length) {
       let current = this.head
       let previous = null
       let index = 0
       if (position === 0) {
         this.head = current.next
-      } else {
+      } 
+      else {
         while (index++ < position) {
           previous = current
           current = current.next
@@ -170,9 +171,10 @@ class LinkedList {
         previous.next = current.next
       }
       this.length--
-        return current.element
+      return current.element
+    } else {
+      return false;
     }
-    return true;
   }
 
   toString() {
@@ -190,14 +192,60 @@ class LinkedList {
     this.length = 0;
   }
 
-  isEmpty() {
+  get isEmpty() {
     return !this.head ? true : false;
   }
 
-  size() {
+  get size() {
     return this.length;
   }
 }
+
+
+/**
+ * Priority queue
+ * array LinkedList Heap
+ */
+class PriorityQueue {
+  constructor() {
+    this.items = []
+  }
+
+  enqueue(element, priority = 0){
+    const queueElement = { element, priority }
+    if (this.isEmpty) {
+        this.items.push(queueElement)
+    } else {
+        const preIndex = this.items.findIndex((item) => queueElement.priority < item.priority)
+        if (preIndex > -1) {
+            this.items.splice(preIndex, 0, queueElement)
+        } else {
+            this.items.push(queueElement)
+        }
+    }
+  }
+
+  dequeue() {
+    return this.items.pop()
+  }
+
+  front(){
+    return this.items[this.items.length - 1]
+  }
+
+  clear(){
+    this.items = []
+  }
+
+  get size() {
+    return this.items.length
+  }
+
+  get isEmpty() {
+    return !this.items.length
+  }
+}
+
 
 
 /**
@@ -278,11 +326,6 @@ class Set {
  */
 // JS Object
 
-
-/**
- * Priority queue
- * array LinkedList Heap
- */
 
 
 /**
@@ -521,5 +564,8 @@ class BinarySearchTree {
 export {
   Bag,
   Queue,
+  Stack,
+  PriorityQueue,
+  LinkedList,
   BinarySearchTree,
 }
