@@ -91,8 +91,6 @@ class Stack {
  */
 
 
-
-
 /*
  * Reference API: https://courses.edx.org/c4x/PekingX/04830050x/asset/2-3.pdf 
  */
@@ -247,7 +245,6 @@ class PriorityQueue {
 }
 
 
-
 /**
  * Set
  */
@@ -260,6 +257,7 @@ class Set {
     return this.items.hasOwnProperty(value)
   }
 
+  // TODO: handle different data-type
   add(value) {
     if (!this.has(value)) {
       this.items[value] = value
@@ -277,11 +275,11 @@ class Set {
   }
 
   get size() {
-    return Object.keys(this.items).length
+    return Object.values(this.items).length
   }
 
   get values() {
-    return Object.keys(this.items)
+    return Object.values(this.items)
   }
 
   union(otherSet) {
@@ -324,13 +322,13 @@ class Set {
  * Dictionary, Associative Array, Map
  * { key: value }
  */
-// JS Object
+// It's just like JS Object, so do not implement it here
 
 
 
 /**
  * HashTable, HashMap
- * right translation: https://zh.wikipedia.org/wiki/%E6%95%A3%E5%88%97
+ * Wiki: https://zh.wikipedia.org/wiki/%E6%95%A3%E5%88%97
  */
 class HashTable {
   constructor() {
@@ -347,6 +345,10 @@ class HashTable {
     return hash % 37
   }
 
+  /**
+   * @param {string} key 
+   * @param {*} value 
+   */
   put(key, value) {
     const position = HashTable.loseloseHashCode(key)
     this.table[position] = value
@@ -496,6 +498,9 @@ class Node {
   }
 }
 
+/**
+ * BinarySearchTree
+ */
 class BinarySearchTree {
 
   constructor() {
@@ -567,5 +572,7 @@ export {
   Stack,
   PriorityQueue,
   LinkedList,
+  Set,
+  HashTable,
   BinarySearchTree,
 }

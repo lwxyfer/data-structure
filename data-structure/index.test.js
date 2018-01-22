@@ -6,6 +6,8 @@ const {
   PriorityQueue,
   Stack,
   LinkedList,
+  Set,
+  HashTable,
   BinarySearchTree
 } = structure;
 
@@ -78,8 +80,6 @@ test('PriorityQueue dequeue', () => {
 
 
 
-
-
 // Stack
 const stackIns = new Stack([1,2,3,4])
 
@@ -119,6 +119,56 @@ test('LinkedListIns insert', () => {
   expect(LinkedListIns.remove(1)).toBe(2)
   expect(LinkedListIns.head.element).toBe(3)
   expect(LinkedListIns.size).toBe(2)
+})
+
+
+
+// Set
+const setIns = new Set()
+setIns.add(1)
+setIns.add(2)
+setIns.add(3)
+setIns.add(4)
+setIns.add('hello')
+setIns.add(3)
+
+const setIns2 = new Set()
+setIns2.add(2)
+setIns2.add(3)
+setIns2.add(5)
+setIns2.add('world')
+
+test('setIns values', () => {
+  expect(setIns.size).toBe(5)
+  expect(setIns.has(3)).toBe(true)
+  expect(setIns.values).toEqual([1,2,3,4,'hello'])
+})
+
+test('setIns remove 2', () => {
+  expect(setIns.remove(2)).toBe(true)
+})
+
+test('setIns union', () => {
+  expect(setIns.union(setIns2).values).toEqual([1,2,3,4,5,'hello', 'world'])
+})
+test('setIns intersection', () => {
+  expect(setIns.intersection(setIns2).values).toEqual([3])
+})
+test('setIns difference', () => {
+  expect(setIns.difference(setIns2).values).toEqual([1,4,'hello'])
+})
+test('setIns subset', () => {
+  expect(setIns.subset(setIns2)).toBe(false)
+})
+
+
+// HashTable
+const hashTableIns = new HashTable()
+test('hashTableIns', () => {
+  hashTableIns.put('name', 12412)
+  expect(hashTableIns.get('name')).toBe(12412)
+  hashTableIns.remove('name')
+  expect(hashTableIns.get('name')).toBe(undefined)
 })
 
 
