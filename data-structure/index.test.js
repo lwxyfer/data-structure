@@ -174,19 +174,36 @@ test('hashTableIns', () => {
 
 
 const tree = new BinarySearchTree();
+const arr = [52,12,45,67,3,5,7,56,35,78,34,67,95,23]
+const orderArr = [...arr].sort((a,b) => a - b)
 
-tree.insert(11)
-tree.insert(7)
-tree.insert(5)
-tree.insert(3)
-tree.insert(9)
-tree.insert(8)
-tree.insert(10)
-tree.insert(13)
-tree.insert(12)
-tree.insert(14)
-tree.insert(20)
-tree.insert(18)
-tree.insert(25)
+arr.forEach(item => {
+  tree.insert(item)
+})
 
-// tree.inOrderTraverse(value => { console.log(value) })
+const inOrder = []
+const preOrder = []
+const postOrder = []
+tree.inOrderTraverse(value => { inOrder.push(value) })
+tree.preOrderTraverse(value => { preOrder.push(value) })
+tree.postOrderTraverse(value => { postOrder.push(value) })
+console.log('postOrder',inOrder)
+console.log('preOrder',preOrder)
+console.log('postOrder',postOrder)
+
+test('tree inOrderTraverse', () => {
+  expect(inOrder).toEqual(orderArr)
+})
+
+test('tree min', () => {
+  expect(tree.min().key).toBe(3)
+})
+
+test('tree search', () => {
+  expect(tree.search(101)).toBe(false)
+  expect(tree.search(12).key).toBe(12)
+  expect(tree.search(78).key).toBe(78)
+})
+
+
+

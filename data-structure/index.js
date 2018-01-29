@@ -563,7 +563,41 @@ class BinarySearchTree {
     }
     postOrderTraverseNode(this.root, callback)
   }
+
+  min(node) {
+    const minNode = node => {
+        return node ? (node.left ? minNode(node.left) : node) : null
+    }
+    return minNode(node || this.root)
+  }
+
+  max(node) {
+    const maxNode = node => {
+        return node ? (node.right ? maxNode(node.right) : node) : null
+    }
+    return maxNode(node || this.root)
+  }
+
+  search(key) {
+    const searchNode = (node, key) => {
+      if (node === null) return false
+      if (node.key === key) return node
+      return searchNode((key < node.key) ? node.left : node.right, key)
+    }
+    return searchNode(this.root, key)
+  }
+
+  remove(key) {
+    if (!this.root) {
+      return false
+    }
+
+    const removeNode = (node, key) => {
+      // if (node.key === key) 
+    }
+  }
 }
+
 
 
 export {
