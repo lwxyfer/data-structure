@@ -592,9 +592,51 @@ class BinarySearchTree {
       return false
     }
 
+    // FIXME: must use parent to remove child. can't just set child to null
     const removeNode = (node, key) => {
-      // if (node.key === key) 
+      if (node.key === key) {
+        if (node.right) {
+          if (node.right.left) {
+            // keep a reference of previous: in order to collect this.left
+            const recursion = (leftNode, previous) => (
+              leftNode.left ?
+              recursion(leftNode.left, leftNode) : 
+              {
+                node: leftNode,
+                previous
+              }
+            )
+            const recursionNode = recursion(node.right.left, node.right)
+  
+            node.key = recursionNode.node.key
+
+            if (recursionNode.node.right) {
+              recursionNode.node.key = recursionNode.node.right.key
+              recursionNode.node.left = recursionNode.node.right.left
+              recursionNode.node.right = recursionNode.node.right.right
+            } else {
+              recursionNode.previous.left = null;
+            }
+          } else {
+            node.key = node.right.key
+            node.right = node.right.right
+          }
+        } else if (node.left) {
+          node.key = node.left.key
+          node.left = node.left.left
+          node.right = node.left.right
+        } else {
+          node = null
+        }
+        return true
+      } else if (node.key > key) {
+        return node.left ? removeNode(node.left, key) : false
+      } else {
+        return node.right ? removeNode(node.right, key) : false
+      }
     }
+
+    return removeNode(this.root, key)
   }
 }
 

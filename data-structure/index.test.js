@@ -205,5 +205,20 @@ test('tree search', () => {
   expect(tree.search(78).key).toBe(78)
 })
 
+test('tree remove', () => {
+  expect(tree.remove(12)).toBe(true)
+
+  const nowTree = []
+  tree.preOrderTraverse(value => { nowTree.push(value) })
+  console.log(nowTree)
+  
+  expect(tree.remove(111)).toBe(false)
+  expect(tree.remove(7)).toBe(true)
+  
+  const nowTree1 = []
+  tree.preOrderTraverse(value => { nowTree1.push(value) })
+  console.log(nowTree1)
+})
+
 
 
