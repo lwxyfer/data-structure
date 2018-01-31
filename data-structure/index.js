@@ -592,8 +592,7 @@ class BinarySearchTree {
       return false
     }
 
-    // FIXME: must use parent to remove child. can't just set child to null
-    const removeNode = (node, key) => {
+    const removeNode = (node, key, previousNode, which) => {
       if (node.key === key) {
         if (node.right) {
           if (node.right.left) {
@@ -626,13 +625,14 @@ class BinarySearchTree {
           node.left = node.left.left
           node.right = node.left.right
         } else {
+          previousNode[which] = null
           node = null
         }
         return true
       } else if (node.key > key) {
-        return node.left ? removeNode(node.left, key) : false
+        return node.left ? removeNode(node.left, key, node, 'left') : false
       } else {
-        return node.right ? removeNode(node.right, key) : false
+        return node.right ? removeNode(node.right, key, node, 'right') : false
       }
     }
 

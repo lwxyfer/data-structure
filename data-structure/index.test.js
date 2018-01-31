@@ -172,7 +172,7 @@ test('hashTableIns', () => {
 })
 
 
-
+// BST
 const tree = new BinarySearchTree();
 const arr = [52,12,45,67,3,5,7,56,35,78,34,67,95,23]
 const orderArr = [...arr].sort((a,b) => a - b)
