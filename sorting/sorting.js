@@ -7,6 +7,42 @@ function exchange(arr, i, j) {
   arr[j] = x;
 }
 
+
+/**
+ * bubble sort
+ */
+export function bubble(array) {
+  const arr = [...array]
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length - i - 1; j++) {
+      if (arr[j] > arr[j+1]) {
+        let tmp = arr[j]
+        arr[j] = arr[j+1]
+        arr[j+1] = tmp
+      }
+    }
+  }
+  return arr
+}
+
+export function bubbleReverse(array) {
+  const arr = [...array]
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length - i - 1; j++) {
+      if (arr[j] < arr[j+1]) {
+        let tmp = arr[j]
+        arr[j] = arr[j+1]
+        arr[j+1] = tmp
+      }
+    }
+  }
+  return arr
+}
+
+
+
+
+
 /**
  * Selection sort
  * @param {array} array to sort
@@ -17,18 +53,21 @@ export function selection(arr, reverse) {
   let i = null;
   let j = null;
   let min = null;
-  for(i = 0; i < length; i++) {
+  for (i = 0; i < length; i++) {
     min = i;
 
-    for(j = i + 1; j < length; j++) {
+    for (j = i + 1; j < length; j++) {
+      // FIXME: Performance. So how to reverse?
       if (reverse ? arr[j] > arr[min] : arr[j] < arr[min]) {
         min = j;
       }
     }
-    exchange(arr, i, min)
+    min !== i ? exchange(arr, i, min) : null
   }
   return arr
 }
+
+
 
 /**
  * insertion sort
@@ -38,8 +77,8 @@ export function selection(arr, reverse) {
 export function insertion(arr, reverse) {
   const length = arr.length;
   for(let i = 1; i < length; i++) {
-    if (reverse ? arr[j] > arr[j-1] : arr[j] < arr[j-1]) {
     for(let j = i; j > 0; j-- ) {
+      if (reverse ? arr[j] > arr[j-1] : arr[j] < arr[j-1]) {
         exchange(arr, j-1, j)
       }
     }
@@ -71,7 +110,10 @@ function merge(arr, low, middle, high) {
   }
 }
 
-
+/**
+ * top to bottom
+ * @param {array} arr 
+ */
 export function mergeSort(arr) {
   function sort(arr, low, high) {
     if (low >= high) {
@@ -94,4 +136,48 @@ export function mergeSortBU(arr) {
     }
   }
   return arr
+}
+
+
+/**
+ * quick sort
+ */
+
+function partition(arr, low, high) {
+  let i = low
+  let j = high
+  const item = arr[low]
+
+  while(true) {
+    while( item > arr[++i] ) {
+      if (i == high) {
+        break
+      }
+    }
+    while( item < arr[--j]) {
+      if (j == low) {
+        break
+      }
+    }
+    if (i >= j) { 
+      break
+    }
+    exchange(arr, i, j)
+  }
+  exchange(arr, low, j)
+  return j
+}
+
+export function quickSort(arr) {
+  const tmp = [...arr]
+  function sort(arg, l, h) {
+    if (l >= h) {
+      return
+    }
+    const j = partition(arg, l, h);
+    sort(arg, l, j-1)
+    sort(arg, j+1, h)
+  }
+  sort(tmp, 0, tmp.length - 1)
+  return tmp
 }

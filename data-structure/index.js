@@ -641,6 +641,16 @@ class BinarySearchTree {
 }
 
 
+/**
+ * TODO: Graph
+ */
+// class Graph() {
+
+  // DFS
+  // BFS
+  // shortest path
+// }
+
 
 export {
   Bag,
