@@ -66,3 +66,42 @@ export function recursionBinarySearch(arr, item) {
   }
   return search(low, high)
 }
+
+
+export function lastBinarySearch(arr,item) {
+  let low = 0
+  let high = arr.length - 1
+  let middle 
+
+  while (low <= high) {
+    middle = Math.floor(low + (high-low)/2)
+    if (item >= arr[middle]) {
+      low = middle + 1
+    } else {
+      high = middle - 1
+    }
+  }
+  if (high >=0 && arr[high] == item) {
+    return high
+  }
+  return -1
+}
+
+export function firstBinarySearch(arr,item) {
+  let low = 0
+  let high = arr.length - 1
+  let middle 
+
+  while (low <= high) {
+    middle = Math.floor(low + (high-low)/2)
+    if (item <= arr[middle]) {
+      high = middle - 1
+    } else {
+      low = middle + 1
+    }
+  }
+  if (low >=0 && arr[low] == item) {
+    return low
+  }
+  return -1
+}

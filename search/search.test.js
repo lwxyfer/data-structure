@@ -1,7 +1,9 @@
 import {
   sequentialSearch,
   binarySearch,
-  recursionBinarySearch
+  recursionBinarySearch,
+  lastBinarySearch,
+  firstBinarySearch
 } from './search.js'
 
 
@@ -14,9 +16,7 @@ test('sequentialSearch 1', () => {
 test('sequentialSearch 2', () => {
   expect(sequentialSearch(testArray, 3)).toBe(1);
 });
-test('sequentialSearch 3', () => {
-  expect(sequentialSearch(testArray, 14)).toBe(2);
-});
+
 
 // binarySearch
 test('binarySearch 1', () => {
@@ -28,11 +28,19 @@ test('binarySearch 2', () => {
 test('binarySearch 2', () => {
   expect(binarySearch(testArray, 3)).toBe(1);
 });
-test('binarySearch 3', () => {
-  expect(binarySearch(testArray, 14)).toBe(3);
-});
+
 
 // recursionBinarySearch
-test('binarySearch 3', () => {
-  expect(binarySearch(testArray, 14)).toBe(3);
+test('recursionBinarySearch 3', () => {
+  expect(recursionBinarySearch(testArray, 34)).toBe(4);
+});
+
+// lastBinarySearch
+test('lastBinarySearch 3', () => {
+  expect(lastBinarySearch(testArray, 14)).toBe(3);
+});
+
+// firstBinarySearch
+test('firstBinarySearch 3', () => {
+  expect(firstBinarySearch(testArray, 14)).toBe(2);
 });
